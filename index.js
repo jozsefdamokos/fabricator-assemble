@@ -553,6 +553,7 @@ var registerHelpers = function () {
 			fn = template;
 		}
 
+		// return html
 		return fn(buildContext(context, opts.hash)).replace(/^\s+/, '');
 
 	});
@@ -568,12 +569,6 @@ var setup = function (userOptions) {
 
 	// merge user options with defaults
 	options = _.merge({}, defaults, userOptions);
-
-	console.log( 'user' );
-	console.log( userOptions );
-
-	console.log( 'options' );
-	console.log( options );
 
 	// setup steps
 	registerHelpers();
