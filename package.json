@@ -22,7 +22,6 @@
     "gray-matter": "^2.0.1",
     "handlebars": "^3.0.3",
     "i": "^0.3.3",
-    "js-beautify": "^1.5.10",
     "js-yaml": "^3.4.0",
     "lodash": "^3.10.1",
     "markdown-it": "^4.4.0",
