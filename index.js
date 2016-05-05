@@ -1,6 +1,5 @@
 // modules
 var _ = require('lodash');
-var beautifyHtml = require('js-beautify').html;
 var chalk = require('chalk');
 var fs = require('fs');
 var globby = require('globby');
@@ -76,16 +75,6 @@ var defaults = {
 	 * @type {String}
 	 */
 	dest: 'dist',
-
-	/**
-	 * beautifier options
-	 * @type {Object}
-	 */
-	beautifier: {
-		indent_size: 1,
-		indent_char: '	',
-		indent_with_tabs: true
-	},
 
 	/**
 	 * Function to call when an error occurs
@@ -551,7 +540,7 @@ var registerHelpers = function () {
 
 		// remove leading numbers from name keyword
 		// partials are always registered with the leading numbers removed
-		var key = name.replace(/(\d+[\-\.])+/, '');
+		var key = name.replace(/(\d+[\-\.]?)+/ig, '');
 
 		// attempt to find pre-compiled partial
 		var template = Handlebars.partials[key],
@@ -564,8 +553,7 @@ var registerHelpers = function () {
 			fn = template;
 		}
 
-		// return beautified html with trailing whitespace removed
-		return beautifyHtml(fn(buildContext(context, opts.hash)).replace(/^\s+/, ''), options.beautifier);
+		return fn(buildContext(context, opts.hash)).replace(/^\s+/, '');
 
 	});
 
@@ -580,6 +568,12 @@ var setup = function (userOptions) {
 
 	// merge user options with defaults
 	options = _.merge({}, defaults, userOptions);
+
+	console.log( 'user' );
+	console.log( userOptions );
+
+	console.log( 'options' );
+	console.log( options );
 
 	// setup steps
 	registerHelpers();
